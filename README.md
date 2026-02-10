@@ -8,7 +8,13 @@ A fully functional e-commerce website for an online bookstore built with Flask, 
 
 This project is a complete web application that allows users to browse, search, and purchase books online. It includes user authentication, shopping cart functionality, order management, and review systems.
 
-## 🚀 Features
+## 🚀 Live Demo
+
+**PythonAnywhere Deployment:** https://yourusername.pythonanywhere.com
+
+*Note: GitHub Pages only supports static websites. This Flask application requires a Python server. Deploy on PythonAnywhere (free) for live demo.*
+
+## 🛠️ Technology Stack
 
 ### Core Features
 - **User Authentication:** Registration, login, logout with session management
@@ -315,6 +321,70 @@ online-bookstore/
 - Book recommendations
 - File upload for book covers
 - User roles and permissions
+
+## ☁️ Deployment Guide
+
+### Deploy on PythonAnywhere (Recommended - Free)
+
+PythonAnywhere is the easiest way to deploy Flask applications for free.
+
+**Steps to Deploy:**
+
+1. **Create PythonAnywhere Account**
+   - Go to: https://www.pythonanywhere.com/
+   - Sign up for a free account
+
+2. **Open a Bash Console**
+   - Click "Bash" in the top menu
+
+3. **Clone the Repository**
+   ```bash
+git clone https://github.com/Anish00079/WEB_assignment_Anish.git
+   cd WEB_assignment_Anish
+   ```
+
+4. **Create Virtual Environment**
+   ```bash
+   mkvirtualenv --python=/usr/bin/python3.9 venv
+   pip install -r requirements.txt
+   ```
+
+5. **Configure Web App**
+   - Click "Web" in the top menu
+   - Click "Add a new web app"
+   - Choose "Flask" and Python version
+
+6. **Configure WSGI File**
+   - Edit the WSGI configuration file
+   - Add the following:
+   ```python
+   import sys
+   sys.path.insert(0, '/home/yourusername/WEB_assignment_Anish')
+   from app import app as application
+   ```
+
+7. **Virtualenv Path**
+   - Set virtualenv path to: `/home/yourusername/.virtualenvs/venv`
+
+8. **Reload Web App**
+   - Click "Reload" button
+
+**Your site will be live at:** https://yourusername.pythonanywhere.com
+
+### Alternative: Deploy on Render (Free)
+
+1. Go to https://render.com and sign up
+2. Connect your GitHub repository
+3. Create a new Web Service
+4. Configure:
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `gunicorn app:app`
+
+### Alternative: Deploy on Railway
+
+1. Go to https://railway.app and sign up
+2. Connect GitHub and select your repository
+3. Deploy with default settings
 
 ## 📄 License
 
