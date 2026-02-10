@@ -10,9 +10,11 @@ This project is a complete web application that allows users to browse, search, 
 
 ## 🚀 Live Demo
 
-**PythonAnywhere Deployment:** https://yourusername.pythonanywhere.com
+**GitHub Repository:** https://github.com/Anish00079/WEB_assignment_Anish
 
-*Note: GitHub Pages only supports static websites. This Flask application requires a Python server. Deploy on PythonAnywhere (free) for live demo.*
+**Live URL:** [Coming Soon - Deploy on PythonAnywhere]
+
+*Note: GitHub Pages only supports static websites. This Flask application requires a Python server. Deploy on PythonAnywhere (free) using the guide below.*
 
 ## 🛠️ Technology Stack
 
