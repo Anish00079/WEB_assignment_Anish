@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Category - Online Bookstore{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="page-header mb-4">
+                <h1 class="display-5 fw-bold"><i class="fas fa-plus"></i> Add Category</h1>
+                <p class="lead">Create a new book category</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-list"></i> Category Information</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="categoryForm" novalidate>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Category Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" required
+                                   placeholder="Enter category name" maxlength="100">
+                            <div class="invalid-feedback">Please enter category name</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" 
+                                      rows="3" placeholder="Enter category description"></textarea>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('categories') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Categories
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Category
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

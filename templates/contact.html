@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - Online Bookstore{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="page-header mb-4">
+        <div class="container">
+            <h1 class="display-5 fw-bold"><i class="fas fa-envelope"></i> Contact Us</h1>
+            <p class="lead">We'd love to hear from you</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Contact Form -->
+        <div class="col-lg-8 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-paper-plane"></i> Send us a Message</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="contactForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Your Name *</label>
+                                <input type="text" class="form-control" id="name" name="name" 
+                                       required minlength="2" maxlength="100" placeholder="John Doe">
+                                <div class="invalid-feedback">Please enter your name</div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" name="email" 
+                                       required placeholder="john@example.com">
+                                <div class="invalid-feedback">Please enter a valid email</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject *</label>
+                            <input type="text" class="form-control" id="subject" name="subject" 
+                                   required minlength="5" maxlength="200" placeholder="What's this about?">
+                            <div class="invalid-feedback">Please enter a subject (minimum 5 characters)</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Your Message *</label>
+                            <textarea class="form-control" id="message" name="message" 
+                                      rows="5" required minlength="10" 
+                                      placeholder="Type your message here..."></textarea>
+                            <div class="invalid-feedback">Please enter your message (minimum 10 characters)</div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Info -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-info-circle"></i> Contact Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-start mb-3">
+                        <i class="fas fa-map-marker-alt fa-2x text-primary me-3"></i>
+                        <div>
+                            <h6 class="mb-0">Address</h6>
+                            <p class="text-muted mb-0">123 Book Street<br>Reading City, RC 12345</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start mb-3">
+                        <i class="fas fa-phone fa-2x text-primary me-3"></i>
+                        <div>
+                            <h6 class="mb-0">Phone</h6>
+                            <p class="text-muted mb-0">+1 (234) 567-8900</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start mb-3">
+                        <i class="fas fa-envelope fa-2x text-primary me-3"></i>
+                        <div>
+                            <h6 class="mb-0">Email</h6>
+                            <p class="text-muted mb-0">info@onlinebookstore.com<br>support@onlinebookstore.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start">
+                        <i class="fas fa-clock fa-2x text-primary me-3"></i>
+                        <div>
+                            <h6 class="mb-0">Business Hours</h6>
+                            <p class="text-muted mb-0">Monday - Friday: 9AM - 6PM<br>Saturday: 10AM - 4PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Media -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-share-alt"></i> Follow Us</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="#" class="btn btn-outline-primary btn-lg">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-info btn-lg">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-danger btn-lg">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-dark btn-lg">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contactForm');
+        
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+            
+            // Name validation
+            const name = document.getElementById('name');
+            if (name.value.trim().length < 2) {
+                name.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                name.classList.remove('is-invalid');
+            }
+            
+            // Email validation
+            const email = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                email.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                email.classList.remove('is-invalid');
+            }
+            
+            // Subject validation
+            const subject = document.getElementById('subject');
+            if (subject.value.trim().length < 5) {
+                subject.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                subject.classList.remove('is-invalid');
+            }
+            
+            // Message validation
+            const message = document.getElementById('message');
+            if (message.value.trim().length < 10) {
+                message.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                message.classList.remove('is-invalid');
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            form.classList.add('was-validated');
+        });
+        
+        // Remove validation on input
+        const inputs = form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+            });
+        });
+    });
+</script>
+{% endblock %}

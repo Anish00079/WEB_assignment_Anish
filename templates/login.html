@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Online Bookstore{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card mt-5">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0"><i class="fas fa-sign-in-alt"></i> Login to Your Account</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="loginForm" novalidate>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" 
+                                   required minlength="3" maxlength="50"
+                                   placeholder="Enter your username">
+                            <div class="invalid-feedback">Please enter a valid username (3-50 characters)</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" 
+                                   required minlength="6" placeholder="Enter your password">
+                            <div class="invalid-feedback">Please enter your password (minimum 6 characters)</div>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember">
+                            <label class="form-check-label" for="remember">Remember me</label>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <hr>
+                    
+                    <div class="text-center">
+                        <p class="mb-0">Don't have an account? 
+                            <a href="{{ url_for('register') }}">Register here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Client-side form validation
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('loginForm');
+        
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+            
+            // Username validation
+            const username = document.getElementById('username');
+            if (username.value.trim().length < 3) {
+                username.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                username.classList.remove('is-invalid');
+            }
+            
+            // Password validation
+            const password = document.getElementById('password');
+            if (password.value.length < 6) {
+                password.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                password.classList.remove('is-invalid');
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            form.classList.add('was-validated');
+        });
+        
+        // Remove validation classes on input
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+            });
+        });
+    });
+</script>
+{% endblock %}

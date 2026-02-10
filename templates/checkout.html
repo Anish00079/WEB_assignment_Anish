@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout - Online Bookstore{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="page-header mb-4">
+        <div class="container">
+            <h1 class="display-5 fw-bold"><i class="fas fa-credit-card"></i> Checkout</h1>
+            <p class="lead">Complete your order</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Checkout Form -->
+        <div class="col-lg-8 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-shipping-fast"></i> Shipping Information</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="checkoutForm" novalidate>
+                        <div class="mb-3">
+                            <label for="shipping_address" class="form-label">Shipping Address *</label>
+                            <textarea class="form-control" id="shipping_address" name="shipping_address" 
+                                      rows="3" required placeholder="Enter your full shipping address"></textarea>
+                            <div class="invalid-feedback">Please enter your shipping address</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Order Notes (Optional)</label>
+                            <textarea class="form-control" id="notes" name="notes" 
+                                      rows="2" placeholder="Special instructions for delivery"></textarea>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> 
+                            <strong>Payment Method:</strong> Cash on Delivery (COD)
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('cart') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Cart
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-check"></i> Place Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-list"></i> Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Cart Items -->
+                    {% for item in cart_items %}
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h6 class="mb-0">{{ item.book.title }}</h6>
+                            <small class="text-muted">Qty: {{ item.quantity }} × ${{ item.book.price }}</small>
+                        </div>
+                        <span>${{ "%.2f"|format(item.subtotal) }}</span>
+                    </div>
+                    {% endfor %}
+                    
+                    <hr>
+                    
+                    <!-- Totals -->
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span>${{ "%.2f"|format(total) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping</span>
+                        <span class="text-success">FREE</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong>Total</strong>
+                        <strong class="h4 text-primary mb-0">${{ "%.2f"|format(total) }}</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Security Info -->
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-lock fa-2x text-success me-3"></i>
+                        <div>
+                            <h6 class="mb-0">Secure Order</h6>
+                            <small class="text-muted">SSL Encrypted</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-undo fa-2x text-info me-3"></i>
+                        <div>
+                            <h6 class="mb-0">Easy Returns</h6>
+                            <small class="text-muted">30-day return policy</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('checkoutForm');
+        
+        form.addEventListener('submit', function(e) {
+            const address = document.getElementById('shipping_address');
+            
+            if (address.value.trim().length < 10) {
+                address.classList.add('is-invalid');
+                e.preventDefault();
+                e.stopPropagation();
+            } else {
+                address.classList.remove('is-invalid');
+            }
+            
+            form.classList.add('was-validated');
+        });
+        
+        document.getElementById('shipping_address').addEventListener('input', function() {
+            this.classList.remove('is-invalid');
+        });
+    });
+</script>
+{% endblock %}

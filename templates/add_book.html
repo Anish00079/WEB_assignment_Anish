@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Book - Online Bookstore{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="page-header mb-4">
+                <h1 class="display-5 fw-bold"><i class="fas fa-plus"></i> Add New Book</h1>
+                <p class="lead">Add a new book to the catalog</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-book"></i> Book Information</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="bookForm" novalidate>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Book Title *</label>
+                            <input type="text" class="form-control" id="title" name="title" required
+                                   placeholder="Enter book title" maxlength="200">
+                            <div class="invalid-feedback">Please enter book title</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="author" class="form-label">Author *</label>
+                            <input type="text" class="form-control" id="author" name="author" required
+                                   placeholder="Enter author name" maxlength="100">
+                            <div class="invalid-feedback">Please enter author name</div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="isbn" class="form-label">ISBN *</label>
+                                <input type="text" class="form-control" id="isbn" name="isbn" required
+                                       placeholder="Enter ISBN" maxlength="20">
+                                <div class="invalid-feedback">Please enter ISBN</div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="price" class="form-label">Price ($) *</label>
+                                <input type="number" class="form-control" id="price" name="price" required
+                                       step="0.01" min="0" placeholder="0.00">
+                                <div class="invalid-feedback">Please enter valid price</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="stock_quantity" class="form-label">Stock Quantity *</label>
+                                <input type="number" class="form-control" id="stock_quantity" name="stock_quantity" 
+                                       required min="0" value="0" placeholder="0">
+                                <div class="invalid-feedback">Please enter stock quantity</div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="category_id" class="form-label">Category</label>
+                                <select class="form-select" id="category_id" name="category_id">
+                                    <option value="">Select Category</option>
+                                    {% for cat in categories %}
+                                    <option value="{{ cat.id }}">{{ cat.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="publisher" class="form-label">Publisher</label>
+                            <input type="text" class="form-control" id="publisher" name="publisher" 
+                                   placeholder="Enter publisher" maxlength="100">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" 
+                                      rows="4" placeholder="Enter book description"></textarea>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('books') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Books
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Book
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
